@@ -9,6 +9,15 @@ enum enMainMenuOptions
     eFindClient = 5, eExit = 6
 };
 
+// Go back to main menu
+void GoBackToMainMenu()
+{
+    cout << "\n\nPress any key to go back to Main Menue...";
+    system("pause>0");
+    ShowMainMenu();
+
+}
+
 // Read main menu option from user
 short ReadMainMenuOption()
 {
@@ -29,7 +38,6 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenueOption)
         system("cls");
         // TODO 1: Implement ShowAllClientsScreen to list all clients
         ShowAllClientsScreen();
-        // TODO 2: Implement GoBackToMainMenue to navigate back to the main menu screen
         GoBackToMainMenue();
         break;
     }
