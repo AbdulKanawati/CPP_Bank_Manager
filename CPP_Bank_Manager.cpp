@@ -75,23 +75,23 @@ vector <sClient> LoadCleintsDataFromFile(string FileName)
 {
     vector <sClient> vClients;
 
-    fstream MyFilel;
-    MyFilel.open(FileName, ios::in);
+    fstream MyFile;
+    MyFile.open(FileName, ios::in);
 
-    if (MyFilel.is_open())
+    if (MyFile.is_open())
     {
         string Line;
         sClient client;
 
         while (getline(MyFilel, Line))
         {
-            client = ConvertLinetoRecord(line);
+            client = ConvertLinetoRecord(Line);
 
-            vclients.push(client);
-            //TODO: rest
+            vClients.push_back(client);
         }
-
+        MyFile.close();
     }
+    return vClients;
 
 }
 
