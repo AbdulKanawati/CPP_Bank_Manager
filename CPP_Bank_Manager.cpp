@@ -105,6 +105,7 @@ void PrintClientRecordLine(sClient Client)
     cout << "| " << setw(12) << left << Client.AccountBalance;
 }
 
+// Displays all client records on screen
 void ShowAllClientsScreen()
 {
     vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName);
@@ -124,15 +125,17 @@ void ShowAllClientsScreen()
     if (vClients.size() == 0)
         cout << "\t\t\t\tNo Clients Available In the System!";
     else
-
-        for (sClient Client : vClients)
+    {
+        for (const sClient& Client : vClients)
         {
             PrintClientRecordLine(Client);
-            // TODO: Rest after implement PrintClientRecordLine
+            cout << endl;
         }
-
-
+    }
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
 }
+
 // Go back to main menu
 void GoBackToMainMenu()
 {
