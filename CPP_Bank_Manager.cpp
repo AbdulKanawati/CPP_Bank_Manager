@@ -1,5 +1,13 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <iomanip>
 using namespace std;
+
+const string ClientsFileName = "Clients.txt";
+
+void ShowMainMenue();
 
 // Enum for main menu options
 enum enMainMenuOptions
@@ -9,6 +17,84 @@ enum enMainMenuOptions
     eFindClient = 5, eExit = 6
 };
 
+// Struct to represent a client record
+struct sClient
+{
+    string AccountNumber;
+    string PinCode;
+    string Name;
+    string Phone;
+    double AccountBalance;
+    bool MarkForDelete = false;
+};
+
+// Splits a string into a vector of strings using a delimiter
+vector<string> SplitString(string S1, string Delim)
+{
+    vector<string> vString;
+
+    short pos = 0;
+    string sWord; // define a string variable 
+
+    // use find() function to get the position of the delimiters  
+    while ((pos = S1.find(Delim)) != std::string::npos)
+    {
+        sWord = S1.substr(0, pos); // store the word   
+        if (sWord != "")
+        {
+            vString.push_back(sWord);
+        }
+
+        S1.erase(0, pos + Delim.length());  /* erase() until positon and move to next word. */
+    }
+
+    if (S1 != "")
+    {
+        vString.push_back(S1); // it adds last word of the string.
+    }
+
+    return vString;
+}
+
+// Converts a line of text from the file into a client record
+sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
+{
+    sClient Client;
+    vector<string> vClientData = SplitString(Line, Seperator);
+    //TODO: Rest
+}
+
+// Loads all clients from file into a vector
+vector <sClient> LoadCleintsDataFromFile(string FileName)
+{
+    vector <sClient> vClients;
+
+    fstream MyFilel;
+    MyFilel.open(FileName, ios::in);
+
+    if (MyFilel.is_open())
+    {
+        string Line;
+        sClient client;
+
+        while (getline(MyFilel, Line))
+        {
+            client = ConvertLinetoRecord(line);
+
+            vclients.push(client);
+            //TODO: rest
+        }
+
+    }
+
+}
+
+void ShowAllClientsScreen()
+{
+    vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName);
+    // TODO 1: implement LoadCleintsDataFromFile
+    // TODO 2: Rest
+}
 // Go back to main menu
 void GoBackToMainMenu()
 {
