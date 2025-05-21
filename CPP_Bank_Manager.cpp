@@ -206,11 +206,25 @@ void PrintClientCard(sClient Client)
 // Finds a client by account number from the list
 bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, sClient& Client)
 {
-    for (sClient C : vClients)
+    for (sClient& C : vClients)
     {
         if (C.AccountNumber == AccountNumber)
         {
             Client = C;
+            return true;
+        }
+    }
+    return false;
+}
+
+// Marks a client for deletion by account number
+bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& vClients)
+{
+    for (sClient& C : vClients)
+    {
+        if (C.AccountBalance == AccountNumber)
+        {
+            C.MarkForDelete = true;
             return true;
         }
     }
@@ -259,11 +273,18 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
     sClient Client;
     char Answer = 'n';
 
-    //TODO: FindClientByAccountNumber
     if (FindClientByAccountNumber(AccountNumber, vClients, Client))
     {
         PrintClientCard(Client);
 
+        cout << "\n\nAre you sure you want delete this client? y/n ? ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+        {
+            //TODO: MarkClientForDeleteByAccountNumber
+            MarkClientForDeleteByAccountNumber(AccountNumber, vClients);
+
+        }
     }
 
 
