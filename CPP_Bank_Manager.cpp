@@ -190,6 +190,19 @@ void ShowAllClientsScreen()
     cout << "_________________________________________\n" << endl;
 }
 
+// Prints a detailed card view of a single client
+void PrintClientCard(sClient Client)
+{
+    cout << "\nThe following are the client details:\n";
+    cout << "-----------------------------------";
+    cout << "\nAccout Number: " << Client.AccountNumber;
+    cout << "\nPin Code     : " << Client.PinCode;
+    cout << "\nName         : " << Client.Name;
+    cout << "\nPhone        : " << Client.Phone;
+    cout << "\nAccount Balance: " << Client.AccountBalance;
+    cout << "\n-----------------------------------\n";
+}
+
 // Finds a client by account number from the list
 bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, sClient& Client)
 {
@@ -249,6 +262,7 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
     //TODO: FindClientByAccountNumber
     if (FindClientByAccountNumber(AccountNumber, vClients, Client))
     {
+        PrintClientCard(Client);
 
     }
 
