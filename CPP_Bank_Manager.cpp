@@ -218,7 +218,8 @@ void AddNewClients()
     do
     {
         cout << "Adding New Client:\n\n";
-        //TODO AddNewClient
+        cout << "\nClient Added Successfully, do you want to add more clients? Y/N? ";
+        cin >> AddMore;
         AddNewClient();
 
     } while (toupper(AddMore) == 'Y');
