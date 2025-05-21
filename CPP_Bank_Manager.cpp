@@ -7,7 +7,7 @@ using namespace std;
 
 const string ClientsFileName = "Clients.txt";
 
-void ShowMainMenue();
+void ShowMainMenu();
 
 // Enum for main menu options
 enum enMainMenuOptions
@@ -124,7 +124,6 @@ sClient ReadNewClient()
     return Client;
 }
 
-
 // Loads all clients from file into a vector
 vector <sClient> LoadCleintsDataFromFile(string FileName)
 {
@@ -191,12 +190,26 @@ void ShowAllClientsScreen()
     cout << "_________________________________________\n" << endl;
 }
 
+// Appends a new client record line to the file
+void AddClientToFile(string FileName, string  stDataLine)
+{
+    fstream MyFile;
+    MyFile.open(FileName, ios::out | ios::app);
+
+    if (MyFile.is_open())
+    {
+        MyFile << stDataLine << endl;
+        MyFile.close();
+    }
+}
+
 // Reads and adds a new client to file
 void AddNewClient()
 {
     sClient Client;
-    //TODO ReadNewClient
     Client = ReadNewClient();
+    //TODO: AddClientToFile
+    AddClientToFile(ClientsFileName, ConvertRecordToLine(Client));
     
 }
 
@@ -211,7 +224,6 @@ void AddNewClients()
         AddNewClient();
 
     } while (toupper(AddMore) == 'Y');
-
 }
 
 // Show the add new clients screen
