@@ -190,6 +190,20 @@ void ShowAllClientsScreen()
     cout << "_________________________________________\n" << endl;
 }
 
+// Finds a client by account number from the list
+bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, sClient& Client)
+{
+    for (sClient C : vClients)
+    {
+        if (C.AccountNumber == AccountNumber)
+        {
+            Client = C;
+            return true;
+        }
+    }
+    return false;
+}
+
 // Appends a new client record line to the file
 void AddClientToFile(string FileName, string  stDataLine)
 {
@@ -225,6 +239,22 @@ void AddNewClients()
     } while (toupper(AddMore) == 'Y');
 }
 
+// Deletes a client from file after confirmation
+bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClients)
+{
+
+    sClient Client;
+    char Answer = 'n';
+
+    //TODO: FindClientByAccountNumber
+    if (FindClientByAccountNumber(AccountNumber, vClients, Client))
+    {
+
+    }
+
+
+}
+
 // Read account number from user
 string ReadClientAccountNumber()
 {
@@ -243,8 +273,9 @@ void ShowDeleteClientScreen()
     cout << "\n-----------------------------------\n";
 
     vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
-    //TODO: ReadClientAccountNumber
     string AccountNumber = ReadClientAccountNumber(); // Get account number
+    //TODO: DeleteClientByAccountNumber
+    DeleteClientByAccountNumber(AccountNumber, vClients); // Delete client
 }
 
 // Show the add new clients screen
