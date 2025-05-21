@@ -208,9 +208,7 @@ void AddNewClient()
 {
     sClient Client;
     Client = ReadNewClient();
-    //TODO: AddClientToFile
-    AddClientToFile(ClientsFileName, ConvertRecordToLine(Client));
-    
+    AddClientToFile(ClientsFileName, ConvertRecordToLine(Client)); 
 }
 
 // Adds multiple clients by looping until user chooses to stop
