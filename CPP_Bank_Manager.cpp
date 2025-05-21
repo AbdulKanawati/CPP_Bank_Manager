@@ -225,6 +225,28 @@ void AddNewClients()
     } while (toupper(AddMore) == 'Y');
 }
 
+// Read account number from user
+string ReadClientAccountNumber()
+{
+    string AccountNumber = "";
+
+    cout << "\nPlease enter AccountNumber? ";
+    cin >> AccountNumber;
+    return AccountNumber;
+}
+
+// Show the delete client screen
+void ShowDeleteClientScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tDelete Client Screen";
+    cout << "\n-----------------------------------\n";
+
+    vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
+    //TODO: ReadClientAccountNumber
+    string AccountNumber = ReadClientAccountNumber(); // Get account number
+}
+
 // Show the add new clients screen
 void ShowAddNewClientsScreen()
 {
@@ -268,7 +290,6 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenueOption)
     }
     case enMainMenuOptions::eAddNewClient:
         system("cls");
-        // TODO 3: Implement ShowAddNewClientsScreen to add new clients
         ShowAddNewClientsScreen();
         GoBackToMainMenue();
         break;
