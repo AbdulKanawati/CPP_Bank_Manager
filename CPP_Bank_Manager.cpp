@@ -70,6 +70,49 @@ sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
     return Client;
 }
 
+// Checks if a client exists by account number
+bool ClientExistsByAccountNumber(string AccountNumber, string FileName)
+{
+    fstream MyFile;
+    MyFile.open(FileName, ios::in);
+
+    if (MyFile.is_open())
+    {
+        string Line;
+        sClient Client;
+
+        while (getline(MyFile, Line))
+        {
+            Client = ConvertLinetoRecord(Line);
+            if (Client.AccountNumber == AccountNumber)
+            {
+                MyFile.close();
+                return true;
+            }
+        }
+        MyFile.close();
+    }
+    return false;
+}
+
+// Reads input from user to create a new client
+sClient ReadNewClient()
+{
+    sClient Client;
+
+    cout << "Enter Account Number? ";
+    getline(cin >> ws, Client.AccountNumber);
+
+    //TODO: ClientExistsByAccountNumber
+    while (ClientExistsByAccountNumber(Client.AccountNumber, ClientsFileName))
+    {
+        cout << "\nClient with [" << Client.AccountNumber << "] already exists, Enter another Account Number? ";
+        getline(cin >> ws, Client.AccountNumber);
+    }
+
+}
+
+
 // Loads all clients from file into a vector
 vector <sClient> LoadCleintsDataFromFile(string FileName)
 {
@@ -136,6 +179,41 @@ void ShowAllClientsScreen()
     cout << "_________________________________________\n" << endl;
 }
 
+// Reads and adds a new client to file
+void AddNewClient()
+{
+    sClient Client;
+    //TODO ReadNewClient
+    Client = ReadNewClient();
+    
+}
+
+// Adds multiple clients by looping until user chooses to stop
+void AddNewClients()
+{
+    char AddMore = 'Y';
+    do
+    {
+        cout << "Adding New Client:\n\n";
+        //TODO AddNewClient
+        AddNewClient();
+
+    } while (toupper(AddMore) == 'Y');
+
+}
+
+// Show the add new clients screen
+void ShowAddNewClientsScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tAdd New Clients Screen";
+    cout << "\n-----------------------------------\n";
+
+    //TODO: Implement AddNewClients
+    AddNewClients();// Call function to add new clients
+
+}
+
 // Go back to main menu
 void GoBackToMainMenu()
 {
@@ -163,7 +241,6 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenueOption)
     case enMainMenuOptions::eListClients:
     {
         system("cls");
-        // TODO 1: Implement ShowAllClientsScreen to list all clients
         ShowAllClientsScreen();
         GoBackToMainMenue();
         break;
