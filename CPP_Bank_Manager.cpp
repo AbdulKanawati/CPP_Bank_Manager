@@ -109,7 +109,19 @@ sClient ReadNewClient()
         cout << "\nClient with [" << Client.AccountNumber << "] already exists, Enter another Account Number? ";
         getline(cin >> ws, Client.AccountNumber);
     }
+    cout << "Enter PinCode? ";
+    getline(cin, Client.PinCode);
 
+    cout << "Enter Name? ";
+    getline(cin, Client.Name);
+
+    cout << "Enter Phone? ";
+    getline(cin, Client.Phone);
+
+    cout << "Enter AccountBalance? ";
+    cin >> Client.AccountBalance;
+
+    return Client;
 }
 
 
