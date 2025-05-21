@@ -232,9 +232,7 @@ void ShowAddNewClientsScreen()
     cout << "\tAdd New Clients Screen";
     cout << "\n-----------------------------------\n";
 
-    //TODO: Implement AddNewClients
     AddNewClients();// Call function to add new clients
-
 }
 
 // Go back to main menu
