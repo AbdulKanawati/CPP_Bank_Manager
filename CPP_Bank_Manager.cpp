@@ -247,23 +247,25 @@ bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& 
 // Saves all clients to file, skipping those marked for deletion
 vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClients)
 {
-    fstram MyFile;
-    MyFile.open(MyFile, ios::out); // overwrite
+    fstream  MyFile;
+    MyFile.open(FileName, ios::out); // overwrite
 
-    string Dataline;
+    string DataLine;
 
     if (MyFile.is_open())
     {
         for (sClient& C : vClients)
         {
-            if (C.MarkForDelete == False)
+            if (!C.MarkForDelete)
             {
                 //we only write records that are not marked for delete.  
-                //TODO: ConvertRecordToLine
                 Dataline = ConvertRecordToLine(C);
+                MyFile << DataLine << endl;
             }
         }
+        MyFile.close();
     }
+    return vClients;
 }
 
 // Appends a new client record line to the file
