@@ -319,12 +319,20 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
         if (Answer == 'y' || Answer == 'Y')
         {
             MarkClientForDeleteByAccountNumber(AccountNumber, vClients);
-            //TODO: SaveClientsDataToFile 
             SaveClientsDataToFile(ClientsFileName, vClients);
+
+            //Refresh Clients
+            vClients = LoadCleintsDataFromFile(ClientsFileName);
+
+            cout << "\n\nClient Deleted Successfully.";
+            return true;
         }
     }
-
-
+    else
+    {
+        cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+        return false;
+    }
 }
 
 // Read account number from user
