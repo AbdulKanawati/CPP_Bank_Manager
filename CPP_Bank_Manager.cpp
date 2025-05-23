@@ -70,6 +70,19 @@ sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
     return Client;
 }
 
+// Converts a client record into a line to be stored in the file
+string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
+{
+    string stClientRecord = "";
+    stClientRecord += Client.AccountNumber + Seperator;
+    stClientRecord += Client.PinCode + Seperator;
+    stClientRecord += Client.Name + Seperator;
+    stClientRecord += Client.Phone + Seperator;
+    stClientRecord += to_string(Client.AccountBalance);
+
+    return stClientRecord;
+}
+
 // Checks if a client exists by account number
 bool ClientExistsByAccountNumber(string AccountNumber, string FileName)
 {
@@ -231,6 +244,28 @@ bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& 
     return false;
 }
 
+// Saves all clients to file, skipping those marked for deletion
+vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClients)
+{
+    fstram MyFile;
+    MyFile.open(MyFile, ios::out); // overwrite
+
+    string Dataline;
+
+    if (MyFile.is_open())
+    {
+        for (sClient& C : vClients)
+        {
+            if (C.MarkForDelete == False)
+            {
+                //we only write records that are not marked for delete.  
+                //TODO: ConvertRecordToLine
+                Dataline = ConvertRecordToLine(C);
+            }
+        }
+    }
+}
+
 // Appends a new client record line to the file
 void AddClientToFile(string FileName, string  stDataLine)
 {
@@ -281,9 +316,9 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            //TODO: MarkClientForDeleteByAccountNumber
             MarkClientForDeleteByAccountNumber(AccountNumber, vClients);
-
+            //TODO: SaveClientsDataToFile 
+            SaveClientsDataToFile(ClientsFileName, vClients);
         }
     }
 
