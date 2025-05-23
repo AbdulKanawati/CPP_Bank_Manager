@@ -354,7 +354,6 @@ void ShowDeleteClientScreen()
 
     vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
     string AccountNumber = ReadClientAccountNumber(); // Get account number
-    //TODO: DeleteClientByAccountNumber
     DeleteClientByAccountNumber(AccountNumber, vClients); // Delete client
 }
 
