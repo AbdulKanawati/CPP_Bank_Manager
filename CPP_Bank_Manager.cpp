@@ -230,6 +230,27 @@ bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, 
     return false;
 }
 
+// Updates a client record by re-entering data
+sClient ChangeClientRecord(string AccountNumber)
+{
+    sClient Client;
+    Client.AccountNumber = AccountNumber;
+
+    cout << "\n\nEnter PinCode? ";
+    getline(cin >> ws, Client.PinCode);
+
+    cout << "Enter Name? ";
+    getline(cin, Client.Name);
+
+    cout << "Enter Phone? ";
+    getline(cin, Client.Phone);
+
+    cout << "Enter AccountBalance? ";
+    cin >> Client.AccountBalance;
+
+    return Client;
+}
+
 // Marks a client for deletion by account number
 bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& vClients)
 {
@@ -335,6 +356,33 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
     }
 }
 
+// Update client information by account number
+bool UpdateClientByAccountNumber(string AccountNumber, vector <sClient>& vClients)
+{
+
+    sClient Client;
+    char Answer = "n";
+
+    if (FindClientByAccountNumber(AccountNumber, vClients, Client))
+    {
+        PrintClientCard(Client);
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+        {
+            for (sClient& C : vClients)
+            {
+                if (C.AccountNumber == AccountNumber)
+                {
+                    //TODO: ChangeClientRecord
+                    C = ChangeClientRecord(AccountNumber);
+                    break;
+                }
+            }
+        }
+    }
+
+}
+
 // Read account number from user
 string ReadClientAccountNumber()
 {
@@ -355,6 +403,19 @@ void ShowDeleteClientScreen()
     vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
     string AccountNumber = ReadClientAccountNumber(); // Get account number
     DeleteClientByAccountNumber(AccountNumber, vClients); // Delete client
+}
+
+// Show the update client screen
+void ShowUpdateClientScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tUpdate Client Info Screen";
+    cout << "\n-----------------------------------\n";
+
+    vector<sClients> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
+    string AccountNumber = ReadClientAccountNumber(); // Get account number
+    //TODO: UpdateClientByAccountNumber
+    UpdateClientByAccountNumber(AccountNumber, vClients); // Update client
 }
 
 // Show the add new clients screen
