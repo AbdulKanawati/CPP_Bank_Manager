@@ -366,6 +366,7 @@ bool UpdateClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
     if (FindClientByAccountNumber(AccountNumber, vClients, Client))
     {
         PrintClientCard(Client);
+        cout << "\n\nAre you sure you want update this client? y/n ? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
@@ -373,12 +374,20 @@ bool UpdateClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
             {
                 if (C.AccountNumber == AccountNumber)
                 {
-                    //TODO: ChangeClientRecord
                     C = ChangeClientRecord(AccountNumber);
                     break;
                 }
             }
+            SaveClientsDataToFile(ClientsFileName, vClients);
+
+            cout << "\n\nClient Updated Successfully.";
+            return true;
         }
+    }
+    else
+    {
+        cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+        return false;
     }
 
 }
