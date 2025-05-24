@@ -150,7 +150,7 @@ vector <sClient> LoadCleintsDataFromFile(string FileName)
         string Line;
         sClient client;
 
-        while (getline(MyFilel, Line))
+        while (getline(MyFile, Line))
         {
             client = ConvertLinetoRecord(Line);
 
@@ -256,7 +256,7 @@ bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& 
 {
     for (sClient& C : vClients)
     {
-        if (C.AccountBalance == AccountNumber)
+        if (C.AccountNumber == AccountNumber)
         {
             C.MarkForDelete = true;
             return true;
@@ -280,7 +280,7 @@ vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClien
             if (!C.MarkForDelete)
             {
                 //we only write records that are not marked for delete.  
-                Dataline = ConvertRecordToLine(C);
+                DataLine = ConvertRecordToLine(C);
                 MyFile << DataLine << endl;
             }
         }
@@ -361,7 +361,7 @@ bool UpdateClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
 {
 
     sClient Client;
-    char Answer = "n";
+    char Answer = 'n';
 
     if (FindClientByAccountNumber(AccountNumber, vClients, Client))
     {
@@ -421,9 +421,8 @@ void ShowUpdateClientScreen()
     cout << "\tUpdate Client Info Screen";
     cout << "\n-----------------------------------\n";
 
-    vector<sClients> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
+    vector<sClient> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
     string AccountNumber = ReadClientAccountNumber(); // Get account number
-    //TODO: UpdateClientByAccountNumber
     UpdateClientByAccountNumber(AccountNumber, vClients); // Update client
 }
 
