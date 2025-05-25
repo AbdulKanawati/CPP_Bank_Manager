@@ -436,6 +436,23 @@ void ShowAddNewClientsScreen()
     AddNewClients();// Call function to add new clients
 }
 
+// Show the find client screen
+void ShowFindClientScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tFind Client Screen";
+    cout << "\n-----------------------------------\n";
+
+    vector<sClients> vClients = LoadCleintsDataFromFile(ClientsFileName);
+    sClient Client;
+    string AccountNumber = ReadClientAccountNumber(); // Get account number
+    if (FindClientByAccountNumber(AccountNumber, vClients, Client))
+        PrintClientCard(Client);
+    else
+        cout << "\nClient with Account Number[" << AccountNumber << "] is not found!";
+    
+}
+
 // Go back to main menu
 void GoBackToMainMenu()
 {
@@ -475,21 +492,18 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenueOption)
 
     case enMainMenuOptions::eDeleteClient:
         system("cls");
-        // TODO 4: Implement ShowDeleteClientScreen to delete a client
         ShowDeleteClientScreen();
         GoBackToMainMenue();
         break;
 
     case enMainMenuOptions::eUpdateClient:
         system("cls");
-        // TODO 5: Implement ShowUpdateClientScreen to update client info
         ShowUpdateClientScreen();
         GoBackToMainMenue();
         break;
 
     case enMainMenuOptions::eFindClient:
         system("cls");
-        // TODO 6: Implement ShowFindClientScreen to find a client
         ShowFindClientScreen();
         GoBackToMainMenue();
         break;
