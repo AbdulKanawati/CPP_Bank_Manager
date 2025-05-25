@@ -138,7 +138,7 @@ sClient ReadNewClient()
 }
 
 // Loads all clients from file into a vector
-vector <sClient> LoadCleintsDataFromFile(string FileName)
+vector <sClient> LoadClientsDataFromFile(string FileName)
 {
     vector <sClient> vClients;
 
@@ -175,13 +175,13 @@ void PrintClientRecordLine(sClient Client)
 // Displays all client records on screen
 void ShowAllClientsScreen()
 {
-    vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName);
+    vector <sClient> vClients = LoadClientsDataFromFile(ClientsFileName);
 
     cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s).";
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
 
-    cout << "| " << left << setw(15) << "Accout Number";
+    cout << "| " << left << setw(15) << "Account Number";
     cout << "| " << left << setw(10) << "Pin Code";
     cout << "| " << left << setw(40) << "Client Name";
     cout << "| " << left << setw(12) << "Phone";
@@ -193,7 +193,7 @@ void ShowAllClientsScreen()
         cout << "\t\t\t\tNo Clients Available In the System!";
     else
     {
-        for (const sClient& Client : vClients)
+        for (sClient Client : vClients)
         {
             PrintClientRecordLine(Client);
             cout << endl;
@@ -247,7 +247,7 @@ sClient ChangeClientRecord(string AccountNumber)
 
     cout << "Enter AccountBalance? ";
     cin >> Client.AccountBalance;
-
+    cin.ignore();
     return Client;
 }
 
@@ -317,9 +317,9 @@ void AddNewClients()
     do
     {
         cout << "Adding New Client:\n\n";
+        AddNewClient();
         cout << "\nClient Added Successfully, do you want to add more clients? Y/N? ";
         cin >> AddMore;
-        AddNewClient();
 
     } while (toupper(AddMore) == 'Y');
 }
@@ -343,7 +343,7 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
             SaveClientsDataToFile(ClientsFileName, vClients);
 
             //Refresh Clients
-            vClients = LoadCleintsDataFromFile(ClientsFileName);
+            vClients = LoadClientsDataFromFile(ClientsFileName);
 
             cout << "\n\nClient Deleted Successfully.";
             return true;
@@ -409,7 +409,7 @@ void ShowDeleteClientScreen()
     cout << "\tDelete Client Screen";
     cout << "\n-----------------------------------\n";
 
-    vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
+    vector <sClient> vClients = LoadClientsDataFromFile(ClientsFileName); // Load clients from file
     string AccountNumber = ReadClientAccountNumber(); // Get account number
     DeleteClientByAccountNumber(AccountNumber, vClients); // Delete client
 }
@@ -421,7 +421,7 @@ void ShowUpdateClientScreen()
     cout << "\tUpdate Client Info Screen";
     cout << "\n-----------------------------------\n";
 
-    vector<sClient> vClients = LoadCleintsDataFromFile(ClientsFileName); // Load clients from file
+    vector<sClient> vClients = LoadClientsDataFromFile(ClientsFileName); // Load clients from file
     string AccountNumber = ReadClientAccountNumber(); // Get account number
     UpdateClientByAccountNumber(AccountNumber, vClients); // Update client
 }
@@ -443,7 +443,7 @@ void ShowFindClientScreen()
     cout << "\tFind Client Screen";
     cout << "\n-----------------------------------\n";
 
-    vector<sClients> vClients = LoadCleintsDataFromFile(ClientsFileName);
+    vector <sClient> vClients = LoadClientsDataFromFile(ClientsFileName);
     sClient Client;
     string AccountNumber = ReadClientAccountNumber(); // Get account number
     if (FindClientByAccountNumber(AccountNumber, vClients, Client))
@@ -464,7 +464,7 @@ void ShowEndScreen()
 // Go back to main menu
 void GoBackToMainMenu()
 {
-    cout << "\n\nPress any key to go back to Main Menue...";
+    cout << "\n\nPress any key to go back to Main Menu...";
     system("pause>0");
     ShowMainMenu();
 
@@ -481,39 +481,39 @@ short ReadMainMenuOption()
 }
 
 // Perform the selected main menu option
-void PerfromMainMenuOption(enMainMenuOptions MainMenueOption)
+void PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
 {
-    switch (MainMenueOption)
+    switch (MainMenuOption)
     {
     case enMainMenuOptions::eListClients:
     {
         system("cls");
         ShowAllClientsScreen();
-        GoBackToMainMenue();
+        GoBackToMainMenu();
         break;
     }
     case enMainMenuOptions::eAddNewClient:
         system("cls");
         ShowAddNewClientsScreen();
-        GoBackToMainMenue();
+        GoBackToMainMenu();
         break;
 
     case enMainMenuOptions::eDeleteClient:
         system("cls");
         ShowDeleteClientScreen();
-        GoBackToMainMenue();
+        GoBackToMainMenu();
         break;
 
     case enMainMenuOptions::eUpdateClient:
         system("cls");
         ShowUpdateClientScreen();
-        GoBackToMainMenue();
+        GoBackToMainMenu();
         break;
 
     case enMainMenuOptions::eFindClient:
         system("cls");
         ShowFindClientScreen();
-        GoBackToMainMenue();
+        GoBackToMainMenu();
         break;
 
     case enMainMenuOptions::eExit:
@@ -528,7 +528,7 @@ void ShowMainMenu()
 {
     system("cls");
     cout << "===========================================\n";
-    cout << "\t\tMain Menue Screen\n";
+    cout << "\t\tMain Menu Screen\n";
     cout << "===========================================\n";
     cout << "\t[1] Show Client List.\n";
     cout << "\t[2] Add New Client.\n";
