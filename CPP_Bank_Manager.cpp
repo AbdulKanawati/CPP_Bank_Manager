@@ -453,6 +453,14 @@ void ShowFindClientScreen()
     
 }
 
+// Show program end screen
+void ShowEndScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tProgram Ends :-)";
+    cout << "\n-----------------------------------\n";
+}
+
 // Go back to main menu
 void GoBackToMainMenu()
 {
@@ -510,7 +518,6 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenueOption)
 
     case enMainMenuOptions::eExit:
         system("cls");
-        // TODO 7: Implement ShowEndScreen to show exit message
         ShowEndScreen();
         break;
     }
