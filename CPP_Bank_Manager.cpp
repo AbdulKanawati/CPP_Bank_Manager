@@ -478,15 +478,42 @@ void GoBackToMainMenu()
 
 }
 
-// Read main menu option from user
-short ReadMainMenuOption()
+// Reads the user input for transaction menu option
+short ReadTransactionsMenueOption() //done
 {
-    cout << "Choose what do you want to do? [1 to 6]? ";
+    cout << "Choose what do you want to do? [1 to 4]? ";
     short Choice = 0;
     cin >> Choice;
 
     return Choice;
 }
+
+// Function to show transaction menu and handle user selection
+void ShowTransactionsMenu()
+{
+    system("cls");
+    cout << "===========================================\n";
+    cout << "\t\tTransactions Menue Screen\n";
+    cout << "===========================================\n";
+    cout << "\t[1] Deposit.\n";
+    cout << "\t[2] Withdraw.\n";
+    cout << "\t[3] Total Balances.\n";
+    cout << "\t[4] Main Menue.\n";
+    cout << "===========================================\n";
+    //TODO2: ReadTransactionsMenuOption
+    //TODO3: PerfromTranactionsMenuOption
+    //PerfromTranactionsMenuOption((enTransactionsMenueOptions)ReadTransactionsMenuOption());
+}
+
+// Read main menu option from user
+    short ReadMainMenuOption()
+    {
+        cout << "Choose what do you want to do? [1 to 6]? ";
+        short Choice = 0;
+        cin >> Choice;
+
+        return Choice;
+    }
 
 // Perform the selected main menu option
 void PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
@@ -523,6 +550,11 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
         ShowFindClientScreen();
         GoBackToMainMenu();
         break;
+
+    case enMainMenuOptions::eShowTransactionsMenu:
+        system("cls");
+        //Todo1: ShowTransactionsMenu
+        ShowTransactionsMenu();
 
     case enMainMenuOptions::eExit:
         system("cls");
