@@ -9,6 +9,14 @@ const string ClientsFileName = "Clients.txt";
 
 void ShowMainMenu();
 
+enum enTransactionsMenueOptions
+{ 
+    eDeposit = 1, 
+    eWithdraw = 2, 
+    eShowTotalBalance = 3, 
+    eShowMainMenu = 4 
+};
+
 // Enum for main menu options
 enum enMainMenuOptions
 {
