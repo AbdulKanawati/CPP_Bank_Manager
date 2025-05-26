@@ -528,8 +528,7 @@ void ShowDepositScreen()
     cout << "\nPlease enter deposit amount? ";
     cin >> Amount;
 
-    //TODO 4:DepositBalanceToClientByAccountNumber
-    //DepositBalanceToClientByAccountNumber(AccountNumber, Amount, vClients);
+    DepositBalanceToClientByAccountNumber(AccountNumber, Amount, vClients);
 
 }
 
