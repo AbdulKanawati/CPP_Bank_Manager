@@ -541,6 +541,14 @@ void GoBackToMainMenu()
 
 }
 
+// Returns to the Transactions Menu after user input
+void GoBackToTransactionsMenu()
+{
+    cout << "\n\nPress any key to go back to Transactions Menu...";
+    system("pause>0");
+    ShowTransactionsMenu();
+}
+
 // Reads the user input for transaction menu option
 short ReadTransactionsMenuOption() //done
 {
@@ -552,15 +560,15 @@ short ReadTransactionsMenuOption() //done
 }
 
 // Executes the selected transaction option
-void PerfromTranactionsMenueOption(enTransactionsMenuOptions TransactionMenuOption)
+void PerfromTranactionsMenuOption(enTransactionsMenuOptions TransactionMenuOption)
 {
     switch (TransactionMenuOption)
     {
     case enTransactionsMenuOptions::eDeposit:
     {
         system("cls");
-        //TODO 3: ShowDepositScreen
-        //ShowDepositScreen();
+        ShowDepositScreen();
+        //TODO: GoBackToTransactionsMenu
         //GoBackToTransactionsMenu();
         break;
     }
