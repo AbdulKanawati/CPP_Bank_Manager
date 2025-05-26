@@ -588,8 +588,8 @@ void ShowTransactionsMenu()
     cout << "\t[3] Total Balances.\n";
     cout << "\t[4] Main Menue.\n";
     cout << "===========================================\n";
-    //TODO2: PerfromTranactionsMenuOption
-    //PerfromTranactionsMenuOption((enTransactionsMenueOptions)ReadTransactionsMenuOption());
+
+    PerfromTranactionsMenuOption((enTransactionsMenuOptions)ReadTransactionsMenuOption());
 }
 
 // Read main menu option from user
