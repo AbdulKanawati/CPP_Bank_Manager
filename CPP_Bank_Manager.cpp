@@ -14,7 +14,7 @@ enum enMainMenuOptions
 {
     eListClients = 1, eAddNewClient = 2,
     eDeleteClient = 3, eUpdateClient = 4,
-    eFindClient = 5, eExit = 6
+    eFindClient = 5, eShowTransactionsMenu = 6, eExit = 7
 };
 
 // Struct to represent a client record
