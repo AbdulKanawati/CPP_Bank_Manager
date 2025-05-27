@@ -532,6 +532,44 @@ void ShowDepositScreen()
 
 }
 
+// Displays the Withdraw screen and handles withdrawing money from a client's account
+void ShowWithDrawScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tWithdraw Screen";
+    cout << "\n-----------------------------------\n";
+
+    sClient Client;
+
+    vector <sClient> vClients = LoadClientsDataFromFile(ClientsFileName);
+    string AccountNumber = ReadClientAccountNumber();
+
+    // Keep asking until a valid account number is entered
+    while (!FindClientByAccountNumber(AccountNumber, vClients, Client))
+    {
+        cout << "\nClient with [" << AccountNumber << "] does not exist.\n";
+        AccountNumber = ReadClientAccountNumber();
+    }
+
+    PrintClientCard(Client);
+
+    double Amount = 0;
+    cout << "\nPlease enter withdraw amount? ";
+    cin >> Amount;
+
+    // Make sure the withdrawal amount does not exceed the available balance
+    while (Amount > Client.AccountBalance)
+    {
+        cout << "\nAmount Exceeds the balance, you can withdraw up to : " << Client.AccountBalance << endl;
+        cout << "Please enter another amount? ";
+        cin >> Amount;
+    }
+
+    // Perform the withdrawal by passing a negative amount to the deposit function
+    DepositBalanceToClientByAccountNumber(AccountNumber, Amount * -1, vClients);
+
+}
+
 // Go back to main menu
 void GoBackToMainMenu()
 {
@@ -568,8 +606,15 @@ void PerfromTranactionsMenuOption(enTransactionsMenuOptions TransactionMenuOptio
     {
         system("cls");
         ShowDepositScreen();
-        //TODO: GoBackToTransactionsMenu
-        //GoBackToTransactionsMenu();
+        GoBackToTransactionsMenu();
+        break;
+    }
+    case enTransactionsMenuOptions::eWithdraw:
+    {
+        system("cls");
+        //TODO: ShowWithDrawScreen
+        ShowWithDrawScreen();
+        GoBackToTransactionsMenu();
         break;
     }
     }
