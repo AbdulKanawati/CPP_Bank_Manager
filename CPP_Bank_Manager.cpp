@@ -180,6 +180,16 @@ void PrintClientRecordLine(sClient Client)
     cout << "| " << setw(12) << left << Client.AccountBalance;
 }
 
+// Prints a single client's balance in a formatted line
+void PrintClientRecordBalanceLine(sClient Client)
+{
+
+    cout << "| " << setw(15) << left << Client.AccountNumber;
+    cout << "| " << setw(40) << left << Client.Name;
+    cout << "| " << setw(12) << left << Client.AccountBalance;
+
+}
+
 // Displays all client records on screen
 void ShowAllClientsScreen()
 {
@@ -209,6 +219,36 @@ void ShowAllClientsScreen()
     }
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
+}
+
+// Displays all clients' individual balances and calculates the total balance
+void ShowTotalBalances()
+{
+
+    vector <sClient> vClients = LoadClientsDataFromFile(ClientsFileName);
+
+    cout << "\n\t\t\t\t\tBalances List (" << vClients.size() << ") Client(s).";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+
+    cout << "| " << left << setw(15) << "Accout Number";
+    cout << "| " << left << setw(40) << "Client Name";
+    cout << "| " << left << setw(12) << "Balance";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+
+    double TotalBalances = 0;
+
+    if (vClients.size() == 0)
+        cout << "\t\t\t\tNo Clients Available In the System!";
+    else
+
+        for (sClient Client : vClients)
+        {
+            //TODO: PrintClientRecordBalanceLine
+            //PrintClientRecordBalanceLine(Client);
+        }
+
 }
 
 // Prints a detailed card view of a single client
@@ -570,6 +610,14 @@ void ShowWithDrawScreen()
 
 }
 
+// Shows a summary of all client balances including the total sum
+void ShowTotalBalancesScreen()
+{
+    //TODO: ShowTotalBalances
+    //ShowTotalBalances();
+
+}
+
 // Go back to main menu
 void GoBackToMainMenu()
 {
@@ -612,8 +660,15 @@ void PerfromTranactionsMenuOption(enTransactionsMenuOptions TransactionMenuOptio
     case enTransactionsMenuOptions::eWithdraw:
     {
         system("cls");
-        //TODO: ShowWithDrawScreen
         ShowWithDrawScreen();
+        GoBackToTransactionsMenu();
+        break;
+    }
+    case enTransactionsMenuOptions::eShowTotalBalance:
+    {
+        system("cls");
+        //TODO: ShowTotalBalancesScreen
+        //ShowTotalBalancesScreen();
         GoBackToTransactionsMenu();
         break;
     }
