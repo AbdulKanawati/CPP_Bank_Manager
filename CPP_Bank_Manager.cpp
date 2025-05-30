@@ -9,6 +9,7 @@ const string ClientsFileName = "Clients.txt";
 
 void ShowMainMenu();
 void ShowTransactionsMenu();
+void Login();
 
 enum enTransactionsMenuOptions
 { 
@@ -25,6 +26,18 @@ enum enMainMenuOptions
     eDeleteClient = 3, eUpdateClient = 4,
     eFindClient = 5, eShowTransactionsMenu = 6, eExit = 7
 };
+
+// Defines a user structure to store login credentials, permissions, and deletion flag
+struct stUser
+{
+    string UserName;
+    string Password;
+    int Permissions;
+    bool MarkForDelete = false;
+};
+
+// Stores the logged-in user
+stUser CurrentUser;
 
 // Struct to represent a client record
 struct sClient
@@ -126,7 +139,6 @@ sClient ReadNewClient()
     cout << "Enter Account Number? ";
     getline(cin >> ws, Client.AccountNumber);
 
-    //TODO: ClientExistsByAccountNumber
     while (ClientExistsByAccountNumber(Client.AccountNumber, ClientsFileName))
     {
         cout << "\nClient with [" << Client.AccountNumber << "] already exists, Enter another Account Number? ";
@@ -774,9 +786,49 @@ void ShowMainMenu()
     PerfromMainMenuOption((enMainMenuOptions)ReadMainMenuOption());
 }
 
+// Validates user credentials and loads user data into CurrentUser if found
+bool LoadUserInfo(string Username, string Password)
+{
+    //TODO 2
+    //return FindUserByUsernameAndPassword(Username, Password, CurrentUser);
+}
+
+// Show the login screen and validate user credentials
+void Login()
+{
+    bool LoginFaild = false;
+
+    string Username, Password;
+
+    do
+    {
+        system("cls");
+
+        cout << "\n---------------------------------\n";
+        cout << "\tLogin Screen";
+        cout << "\n---------------------------------\n";
+
+        if (LoginFaild)
+        {
+            cout << "Invlaid Username/Password!\n";
+        }
+
+        cout << "Enter Username? ";
+        cin >> Username;
+
+        cout << "Enter Password? ";
+        cin >> Password;
+
+        //TODO 1
+        //LoginFaild = !LoadUserInfo(Username, password);
+
+    } while (LoginFaild);
+}
+
+// Program entry point – starts with login screen
 int main()
 {
-    ShowMainMenu(); // Start program by showing main menu
+    Login();
     system("pause>0");
     return 0;
 }
