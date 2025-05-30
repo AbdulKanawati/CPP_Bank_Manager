@@ -618,9 +618,7 @@ void ShowWithDrawScreen()
 // Shows a summary of all client balances including the total sum
 void ShowTotalBalancesScreen()
 {
-    //TODO: ShowTotalBalances
-    //ShowTotalBalances();
-
+    ShowTotalBalances();
 }
 
 // Go back to main menu
