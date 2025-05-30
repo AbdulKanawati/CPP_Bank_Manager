@@ -8,6 +8,7 @@ using namespace std;
 const string ClientsFileName = "Clients.txt";
 
 void ShowMainMenu();
+void ShowTransactionsMenu();
 
 enum enTransactionsMenuOptions
 { 
@@ -670,10 +671,13 @@ void PerfromTranactionsMenuOption(enTransactionsMenuOptions TransactionMenuOptio
     case enTransactionsMenuOptions::eShowTotalBalance:
     {
         system("cls");
-        //TODO: ShowTotalBalancesScreen
-        //ShowTotalBalancesScreen();
+        ShowTotalBalancesScreen();
         GoBackToTransactionsMenu();
         break;
+    }
+    case enTransactionsMenuOptions::eShowMainMenu:
+    {
+        ShowMainMenu();
     }
     }
 
