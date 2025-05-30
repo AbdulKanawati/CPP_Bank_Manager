@@ -83,6 +83,7 @@ sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
 string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
 {
     string stClientRecord = "";
+
     stClientRecord += Client.AccountNumber + Seperator;
     stClientRecord += Client.PinCode + Seperator;
     stClientRecord += Client.Name + Seperator;
@@ -477,7 +478,6 @@ bool DepositBalanceToClientByAccountNumber(string AccountNumber, double Amount, 
     return false;
 }
 
-
 // Read account number from user
 string ReadClientAccountNumber()
 {
@@ -700,7 +700,7 @@ void ShowTransactionsMenu()
 }
 
 // Read main menu option from user
-    short ReadMainMenuOption()
+short ReadMainMenuOption()
     {
         cout << "Choose what do you want to do? [1 to 6]? ";
         short Choice = 0;
@@ -747,7 +747,6 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
 
     case enMainMenuOptions::eShowTransactionsMenu:
         system("cls");
-        //Todo1: ShowTransactionsMenu
         ShowTransactionsMenu();
 
     case enMainMenuOptions::eExit:
@@ -778,5 +777,6 @@ void ShowMainMenu()
 int main()
 {
     ShowMainMenu(); // Start program by showing main menu
+    system("pause>0");
     return 0;
 }
