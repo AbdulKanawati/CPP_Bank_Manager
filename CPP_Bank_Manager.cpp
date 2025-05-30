@@ -245,9 +245,14 @@ void ShowTotalBalances()
 
         for (sClient Client : vClients)
         {
-            //TODO: PrintClientRecordBalanceLine
-            //PrintClientRecordBalanceLine(Client);
+            PrintClientRecordBalanceLine(Client);
+            TotalBalances += Client.AccountBalance;
+
+            cout << endl;
         }
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+    cout << "\t\t\t\t\t   Total Balances = " << TotalBalances;
 
 }
 
