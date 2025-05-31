@@ -851,8 +851,9 @@ void ShowMainMenu()
 // Checks if provided username and password match a valid user
 bool IsValidUser(string Username, string Password)
 {
-    //TODO 2
-    //return FindUserByUsernameAndPassword(Username, Password, CurrentUser);
+
+    return FindUserByUsernameAndPassword(Username, Password, CurrentUser);
+
 }
 
 // Show the login screen and validate user credentials
