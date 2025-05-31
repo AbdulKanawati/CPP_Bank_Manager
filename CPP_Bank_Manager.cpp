@@ -6,6 +6,7 @@
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
+const string UserFileName = "Users.txt";
 
 void ShowMainMenu();
 void ShowTransactionsMenu();
@@ -76,6 +77,23 @@ vector<string> SplitString(string S1, string Delim)
     }
 
     return vString;
+}
+
+// Converts a line of text into a stUser record using a delimiter
+stUser ConvertUserLinetoRecord(string Line, string Seperator = "#//#")
+{
+
+    stUser User;
+    vector<string> vUserData;
+
+    vUserData = SplitString(Line, Seperator);
+
+    User.UserName = vUserData[0];
+    User.Password = vUserData[1];
+    User.Permissions = stoi(vUserData[2]);
+
+    return User;
+
 }
 
 // Converts a line of text from the file into a client record
@@ -157,6 +175,27 @@ sClient ReadNewClient()
     cin >> Client.AccountBalance;
 
     return Client;
+}
+
+// Loads users from file and returns a vector of user records
+vector<stUser> LoadUsersDataFromFile(string FileName)
+{
+    vector<stUser> vUsers;
+
+    fstream MyFile;
+    MyFile.open(FileName, ios::in); // read Mode
+
+    if (MyFile.is_open())
+    {
+        string Line;
+        stUser User;
+
+        while (getline(MyFile, Line))
+        {
+            //TODO 4
+            //User = ConvertUserLinetoRecord(Line);
+        }
+    }
 }
 
 // Loads all clients from file into a vector
@@ -295,6 +334,15 @@ bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, 
         }
     }
     return false;
+}
+
+// Finds a user by username and password, and loads matching user into reference
+bool FindUserByUsernameAndPassword(string Username, string Password, stUser& User)
+{
+    //TODO 3
+    //vector <stUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+
+
 }
 
 // Updates a client record by re-entering data
@@ -786,8 +834,8 @@ void ShowMainMenu()
     PerfromMainMenuOption((enMainMenuOptions)ReadMainMenuOption());
 }
 
-// Validates user credentials and loads user data into CurrentUser if found
-bool LoadUserInfo(string Username, string Password)
+// Checks if provided username and password match a valid user
+bool IsValidUser(string Username, string Password)
 {
     //TODO 2
     //return FindUserByUsernameAndPassword(Username, Password, CurrentUser);
@@ -820,7 +868,7 @@ void Login()
         cin >> Password;
 
         //TODO 1
-        //LoginFaild = !LoadUserInfo(Username, password);
+        //LoginFaild = !IsValidUser(Username, password);
 
     } while (LoginFaild);
 }
