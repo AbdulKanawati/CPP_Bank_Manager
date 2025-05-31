@@ -6,7 +6,7 @@
 using namespace std;
 
 const string ClientsFileName = "Clients.txt";
-const string UserFileName = "Users.txt";
+const string UsersFileName = "Users.txt";
 
 void ShowMainMenu();
 void ShowTransactionsMenu();
@@ -344,9 +344,18 @@ bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, 
 // Finds a user by username and password, and loads matching user into reference
 bool FindUserByUsernameAndPassword(string Username, string Password, stUser& User)
 {
-    //TODO 3
-    //vector <stUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+    
+    vector <stUser> vUsers = LoadUsersDataFromFile(UsersFileName);
 
+    for (stUser U : vUsers)
+    {
+        if (U.UserName == Username && U.Password == Password)
+        {
+            User = U;
+            return true;
+        }
+    }
+    return false;
 
 }
 
