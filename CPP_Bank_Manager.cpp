@@ -759,12 +759,22 @@ void GoBackToMainMenu()
 
 }
 
-// Returns to the Transactions Menu after user input
+// Return to the Transactions Menu after user input
 void GoBackToTransactionsMenu()
 {
     cout << "\n\nPress any key to go back to Transactions Menu...";
     system("pause>0");
     ShowTransactionsMenu();
+}
+
+// Return to the manage users menu after user input
+void GoBackToManageUsersMenu()
+{
+
+    cout << "\n\nPress any key to go back to Manage Users Menu...";
+    system("pause>0");
+    ShowManageUsersMenu();
+
 }
 
 // Reads the user input for transaction menu option
@@ -856,20 +866,18 @@ void PerfromManageUsersMenuOption(enManageUsersMenuOptions ManageUsersMenuOption
     case enManageUsersMenuOptions::eListUsers:
     {
         system("cls");
-        //TODO 3 : ShowListUsersScreen
-        //ShowListUsersScreen();
+        ShowListUsersScreen();
+        //TODO 3 
         //GoBackToManageUsersMenu();
         break;
     }
-
-
 
     }
 
 }
 
 // Shows the manage users menu 
-void ShowManageUsersMenue()
+void ShowManageUsersMenu()
 {
 
     system("cls");
