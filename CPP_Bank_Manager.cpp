@@ -246,6 +246,15 @@ void PrintClientRecordLine(sClient Client)
     cout << "| " << setw(12) << left << Client.AccountBalance;
 }
 
+// Print a single user record in table format
+void PrintUserRecordLine(stUser User)
+{
+
+    cout << "| " << setw(15) << left << User.UserName;
+    cout << "| " << setw(10) << left << User.Password;
+    cout << "| " << setw(40) << left << User.Permissions;
+}
+
 // Prints a single client's balance in a formatted line
 void PrintClientRecordBalanceLine(sClient Client)
 {
@@ -285,6 +294,34 @@ void ShowAllClientsScreen()
     }
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
+}
+
+// Show all users with their credentials and permissions
+void ShowAllUsersScreen()
+{
+
+    vector <stUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+
+    cout << "\n\t\t\t\t\tUsers List (" << vUsers.size() << ") User(s).";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+
+    cout << "| " << left << setw(15) << "User Name";
+    cout << "| " << left << setw(10) << "Password";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+
+    if (vUsers.size() == 0)
+        cout << "\t\t\t\tNo Users Available In the System!";
+    else
+
+        for (stUser User : vUsers)
+        {
+            //TODO 5
+            //PrintUserRecordLine(User);
+            cout << endl;
+        }
+
 }
 
 // Displays all clients' individual balances and calculates the total balance
@@ -570,6 +607,13 @@ string ReadClientAccountNumber()
     return AccountNumber;
 }
 
+// Show the list users screen
+void ShowListUsersScreen()
+{
+    //TODO 4: 
+    //ShowAllUsersScreen();
+
+}
 // Show the delete client screen
 void ShowDeleteClientScreen()
 {
@@ -802,6 +846,26 @@ short ReadManageUsersMenuOption()
     return Choice;
 }
 
+// Perform the selected manage users menu option
+void PerfromManageUsersMenuOption(enManageUsersMenuOptions ManageUsersMenuOption)
+{
+    switch (ManageUsersMenuOption)
+    {
+    case enManageUsersMenuOptions::eListUsers:
+    {
+        system("cls");
+        //TODO 3 : ShowListUsersScreen
+        //ShowListUsersScreen();
+        //GoBackToManageUsersMenu();
+        break;
+    }
+
+
+
+    }
+
+}
+
 // Shows the manage users menu 
 void ShowManageUsersMenue()
 {
@@ -818,7 +882,7 @@ void ShowManageUsersMenue()
     cout << "\t[6] Main Menue.\n";
     cout << "===========================================\n";
 
-    //TODO 2 : enManageUsersMenuOptions
+    //TODO 2 : PerfromManageUsersMenuOption
     //PerfromManageUsersMenuOption((enManageUsersMenuOptions)ReadManageUsersMenuOption());
 }
 
