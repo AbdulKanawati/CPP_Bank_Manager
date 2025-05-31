@@ -12,6 +12,7 @@ void ShowMainMenu();
 void ShowTransactionsMenu();
 void Login();
 
+// Enum for Transaction menu options
 enum enTransactionsMenuOptions
 { 
     eDeposit = 1, 
@@ -25,7 +26,8 @@ enum enMainMenuOptions
 {
     eListClients = 1, eAddNewClient = 2,
     eDeleteClient = 3, eUpdateClient = 4,
-    eFindClient = 5, eShowTransactionsMenu = 6, eExit = 7
+    eFindClient = 5, eShowTransactionsMenu = 6, 
+    eManageUsers = 7, eExit = 8
 };
 
 // Defines a user structure to store login credentials, permissions, and deletion flag
@@ -776,12 +778,43 @@ void ShowTransactionsMenu()
 // Read main menu option from user
 short ReadMainMenuOption()
     {
-        cout << "Choose what do you want to do? [1 to 6]? ";
+
+        cout << "Choose what do you want to do? [1 to 8]? ";
         short Choice = 0;
         cin >> Choice;
 
         return Choice;
     }
+
+// Read manage users menu from user
+short ReadManageUsersMenuOption()
+{
+    cout << "Choose what do you want to do? [1 to 6]? ";
+    short Choice = 0;
+    cin >> Choice;
+
+    return Choice;
+}
+
+// Shows the manage users menu 
+void ShowManageUsersMenue()
+{
+
+    system("cls");
+    cout << "===========================================\n";
+    cout << "\t\tManage Users Menue Screen\n";
+    cout << "===========================================\n";
+    cout << "\t[1] List Users.\n";
+    cout << "\t[2] Add New User.\n";
+    cout << "\t[3] Delete User.\n";
+    cout << "\t[4] Update User.\n";
+    cout << "\t[5] Find User.\n";
+    cout << "\t[6] Main Menue.\n";
+    cout << "===========================================\n";
+
+    //TODO 2 : ReadManageUsersMenuOption
+    //PerfromManageUsersMenuOption((enManageUsersMenuOptions)ReadManageUsersMenuOption());
+}
 
 // Perform the selected main menu option
 void PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
@@ -823,9 +856,16 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
         system("cls");
         ShowTransactionsMenu();
 
+    case enMainMenuOptions::eManageUsers:
+        system("cls");
+        //TODO 1
+        //ShowManageUsersMenu();
+        break;
+
     case enMainMenuOptions::eExit:
         system("cls");
-        ShowEndScreen();
+        //ShowEndScreen();
+        Login();
         break;
     }
 }
@@ -843,9 +883,12 @@ void ShowMainMenu()
     cout << "\t[4] Update Client Info.\n";
     cout << "\t[5] Find Client.\n";
     cout << "\t[6] Transactions.\n";
-    cout << "\t[7] Exit.\n";
+    cout << "\t[7] Manage Users.\n";
+    cout << "\t[8] Logout.\n";
     cout << "===========================================\n";
+
     PerfromMainMenuOption((enMainMenuOptions)ReadMainMenuOption());
+
 }
 
 // Checks if provided username and password match a valid user
