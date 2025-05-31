@@ -21,6 +21,12 @@ enum enTransactionsMenuOptions
     eShowMainMenu = 4 
 };
 
+// Enum for manage users menu options
+enum enManageUsersMenuOptions {
+    eListUsers = 1, eAddNewUser = 2, eDeleteUser = 3,
+    eUpdateUser = 4, eFindUser = 5, eMainMenue = 6
+};
+
 // Enum for main menu options
 enum enMainMenuOptions
 {
@@ -812,7 +818,7 @@ void ShowManageUsersMenue()
     cout << "\t[6] Main Menue.\n";
     cout << "===========================================\n";
 
-    //TODO 2 : ReadManageUsersMenuOption
+    //TODO 2 : enManageUsersMenuOptions
     //PerfromManageUsersMenuOption((enManageUsersMenuOptions)ReadManageUsersMenuOption());
 }
 
