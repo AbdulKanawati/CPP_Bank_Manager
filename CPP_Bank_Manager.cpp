@@ -317,11 +317,12 @@ void ShowAllUsersScreen()
 
         for (stUser User : vUsers)
         {
-            //TODO 5
-            //PrintUserRecordLine(User);
+            PrintUserRecordLine(User);
             cout << endl;
         }
 
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
 }
 
 // Displays all clients' individual balances and calculates the total balance
