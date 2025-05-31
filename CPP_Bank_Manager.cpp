@@ -882,10 +882,11 @@ void Login()
         cout << "Enter Password? ";
         cin >> Password;
 
-        //TODO 1
-        //LoginFaild = !IsValidUser(Username, password);
+        LoginFaild = !IsValidUser(Username, Password);
 
     } while (LoginFaild);
+
+    ShowMainMenu();
 }
 
 // Program entry point – starts with login screen
