@@ -192,10 +192,15 @@ vector<stUser> LoadUsersDataFromFile(string FileName)
 
         while (getline(MyFile, Line))
         {
-            //TODO 4
-            //User = ConvertUserLinetoRecord(Line);
+            User = ConvertUserLinetoRecord(Line);
+            vUsers.push_back(User);
         }
+
+        MyFile.close();
     }
+
+    return vUsers;
+
 }
 
 // Loads all clients from file into a vector
