@@ -611,10 +611,11 @@ string ReadClientAccountNumber()
 // Show the list users screen
 void ShowListUsersScreen()
 {
-    //TODO 4: 
-    //ShowAllUsersScreen();
+
+    ShowAllUsersScreen();
 
 }
+
 // Show the delete client screen
 void ShowDeleteClientScreen()
 {
