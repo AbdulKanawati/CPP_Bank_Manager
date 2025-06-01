@@ -126,7 +126,7 @@ sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
 }
 
 // Convert a client record into a line to be stored in the file
-string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
+string ConvertClientRecordToLine(sClient Client, string Seperator = "#//#")
 {
     string stClientRecord = "";
 
@@ -585,7 +585,7 @@ vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClien
             if (!C.MarkForDelete)
             {
                 //we only write records that are not marked for delete.  
-                DataLine = ConvertRecordToLine(C);
+                DataLine = ConvertClientRecordToLine(C);
                 MyFile << DataLine << endl;
             }
         }
@@ -612,7 +612,7 @@ void AddNewClient()
 {
     sClient Client;
     Client = ReadNewClient();
-    AddDataLineToFile(ClientsFileName, ConvertRecordToLine(Client));
+    AddDataLineToFile(ClientsFileName, ConvertClientRecordToLine(Client));
 }
 
 // Add a single new user to the users file
@@ -620,7 +620,7 @@ void AddNewUser()
 {
     stUser User;
     User = ReadNewUser();
-
+    //AddDataLineToFile(UsersFileName, ConvertUserRecordToLine(User));
 }
 
 // Add multiple clients by looping until user chooses to stop
