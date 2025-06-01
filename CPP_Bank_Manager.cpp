@@ -230,15 +230,64 @@ int ReadPermissionsToSet()
     cout << "\nDo you want to give full access? y/n? ";
     cin >> Answer;
     
-    if (Answer == toupper('y'))
-        return -1;
+    if (toupper(Answer) == 'Y')
+    {
+        return enMainMenuPermissions::eAll; // -1
+    }
 
     cout << "\nDo you want to give access to : \n ";
 
     cout << "\nShow Client List? y/n? ";
     cin >> Answer;
-   // if(Answer == toupper('y'))
-        //TODO 8 enMainMenuPermissions 
+    if (Answer == toupper('y'))
+    {
+        Permissions |= enMainMenuPermissions::pListClients;
+    }
+
+    cout << "\nAdd New Client? y/n? ";
+    cin >> Answer;
+    if (toupper(Answer) == 'Y')
+    {
+        Permissions |= pAddNewClient;
+    }
+
+    cout << "\nDelete Client? y/n? ";
+    cin >> Answer;
+    if (toupper(Answer) == 'Y')
+    {
+        Permissions |= pDeleteClient;
+    }
+
+    cout << "\nUpdate Client? y/n? ";
+    cin >> Answer;
+    if (toupper(Answer) == 'Y')
+    {
+        Permissions |= pUpdateClients;
+    }
+
+    cout << "\nFind Client? y/n? ";
+    cin >> Answer;
+    if (toupper(Answer) == 'Y')
+    {
+        Permissions |= pFindClient;
+    }
+
+    cout << "\nTransactions? y/n? ";
+    cin >> Answer;
+    if (toupper(Answer) == 'Y')
+    {
+        Permissions |= pTranactions;
+    }
+
+    cout << "\nManage Users? y/n? ";
+    cin >> Answer;
+    if (toupper(Answer) == 'Y')
+    {
+        Permissions |= pManageUsers;
+    }
+
+    return Permissions;
+
 }
 
 // Read new user data from input and ensure unique username
