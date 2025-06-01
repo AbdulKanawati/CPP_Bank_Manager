@@ -310,9 +310,9 @@ stUser ReadNewUser()
     cout << "Enter Password? ";
     getline(cin, User.Password);
 
-    //TODO 7:
-    //User.Permissions = ReadPermissionsToSet();
+    User.Permissions = ReadPermissionsToSet();
 
+    return User;
 }
 
 // Load users from file and returns a vector of user records
