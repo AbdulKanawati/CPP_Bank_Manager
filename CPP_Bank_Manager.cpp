@@ -594,8 +594,8 @@ vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClien
     return vClients;
 }
 
-// Append a new client record line to the file
-void AddClientToFile(string FileName, string  stDataLine)
+// Append a single line of text data to the specified file
+void AddDataLineToFile(string FileName, string  stDataLine)
 {
     fstream MyFile;
     MyFile.open(FileName, ios::out | ios::app);
@@ -612,17 +612,17 @@ void AddNewClient()
 {
     sClient Client;
     Client = ReadNewClient();
-    AddClientToFile(ClientsFileName, ConvertRecordToLine(Client)); 
+    AddDataLineToFile(ClientsFileName, ConvertRecordToLine(Client));
 }
 
 // Add a single new user to the users file
 void AddNewUser()
 {
     stUser User;
-    //TODO 6
-    //User = ReadNewUser();
+    User = ReadNewUser();
 
 }
+
 // Add multiple clients by looping until user chooses to stop
 void AddNewClients()
 {
