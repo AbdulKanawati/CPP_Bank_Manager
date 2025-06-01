@@ -36,7 +36,7 @@ enum enMainMenuOptions
     eManageUsers = 7, eExit = 8
 };
 
-// Defines a user structure to store login credentials, permissions, and deletion flag
+// Define a user structure to store login credentials, permissions, and deletion flag
 struct stUser
 {
     string UserName;
@@ -45,7 +45,7 @@ struct stUser
     bool MarkForDelete = false;
 };
 
-// Stores the logged-in user
+// Store the logged-in user
 stUser CurrentUser;
 
 // Struct to represent a client record
@@ -59,7 +59,7 @@ struct sClient
     bool MarkForDelete = false;
 };
 
-// Splits a string into a vector of strings using a delimiter
+// Split a string into a vector of strings using a delimiter
 vector<string> SplitString(string S1, string Delim)
 {
     vector<string> vString;
@@ -87,7 +87,7 @@ vector<string> SplitString(string S1, string Delim)
     return vString;
 }
 
-// Converts a line of text into a stUser record using a delimiter
+// Convert a line of text into a stUser record using a delimiter
 stUser ConvertUserLinetoRecord(string Line, string Seperator = "#//#")
 {
 
@@ -104,7 +104,7 @@ stUser ConvertUserLinetoRecord(string Line, string Seperator = "#//#")
 
 }
 
-// Converts a line of text from the file into a client record
+// Convert a line of text from the file into a client record
 sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
 {
     sClient Client;
@@ -118,7 +118,7 @@ sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
     return Client;
 }
 
-// Converts a client record into a line to be stored in the file
+// Convert a client record into a line to be stored in the file
 string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
 {
     string stClientRecord = "";
@@ -132,7 +132,7 @@ string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
     return stClientRecord;
 }
 
-// Checks if a client exists by account number
+// Check if a client exists by account number
 bool ClientExistsByAccountNumber(string AccountNumber, string FileName)
 {
     fstream MyFile;
@@ -157,7 +157,35 @@ bool ClientExistsByAccountNumber(string AccountNumber, string FileName)
     return false;
 }
 
-// Reads input from user to create a new client
+// Check if a username already exists in the given file
+bool UserExistsByUsername(string Username, string FileName)
+{
+
+    fstream MyFile;
+    MyFile.open(FileName, ios::in);
+
+    if (MyFile.is_open())
+    {
+        string Line;
+        stUser User;
+
+        while (getline(MyFile, Line))
+        {
+            User = ConvertUserLinetoRecord(Line);
+
+            if (User.UserName == Username)
+            {
+                MyFile.close();
+                return true;
+            }
+        }
+    }
+
+    return false;
+
+}
+
+// Read input from user to create a new client
 sClient ReadNewClient()
 {
     sClient Client;
@@ -185,7 +213,28 @@ sClient ReadNewClient()
     return Client;
 }
 
-// Loads users from file and returns a vector of user records
+// Read new user data from input and ensure unique username
+stUser ReadNewUser()
+{
+    stUser User;
+
+    cout << "Enter Username? ";
+
+    // Usage of std::ws will extract allthe whitespace character
+    getline(cin >> ws, User.UserName);
+
+
+    //TODO 7 : UserExistsByUsername
+    /*while (UserExistsByUsername(User.UserName, UsersFileName))
+    {
+        cout << "\nUser with [" << User.UserName << "] already exists, Enter another Username? ";
+        getline(cin >> ws, User.UserName);
+    }
+    */
+
+}
+
+// Load users from file and returns a vector of user records
 vector<stUser> LoadUsersDataFromFile(string FileName)
 {
     vector<stUser> vUsers;
@@ -211,7 +260,7 @@ vector<stUser> LoadUsersDataFromFile(string FileName)
 
 }
 
-// Loads all clients from file into a vector
+// Load all clients from file into a vector
 vector <sClient> LoadClientsDataFromFile(string FileName)
 {
     vector <sClient> vClients;
@@ -236,7 +285,7 @@ vector <sClient> LoadClientsDataFromFile(string FileName)
 
 }
 
-// Prints a formatted client record
+// Print a formatted client record
 void PrintClientRecordLine(sClient Client)
 {
     cout << "| " << setw(15) << left << Client.AccountNumber;
@@ -255,7 +304,7 @@ void PrintUserRecordLine(stUser User)
     cout << "| " << setw(40) << left << User.Permissions;
 }
 
-// Prints a single client's balance in a formatted line
+// Print a single client's balance in a formatted line
 void PrintClientRecordBalanceLine(sClient Client)
 {
 
@@ -265,7 +314,7 @@ void PrintClientRecordBalanceLine(sClient Client)
 
 }
 
-// Displays all client records on screen
+// Display all client records on screen
 void ShowAllClientsScreen()
 {
     vector <sClient> vClients = LoadClientsDataFromFile(ClientsFileName);
@@ -325,7 +374,7 @@ void ShowAllUsersScreen()
     cout << "_________________________________________\n" << endl;
 }
 
-// Displays all clients' individual balances and calculates the total balance
+// Display all clients' individual balances and calculates the total balance
 void ShowTotalBalances()
 {
 
@@ -360,7 +409,7 @@ void ShowTotalBalances()
 
 }
 
-// Prints a detailed card view of a single client
+// Print a detailed card view of a single client
 void PrintClientCard(sClient Client)
 {
     cout << "\nThe following are the client details:\n";
@@ -373,7 +422,7 @@ void PrintClientCard(sClient Client)
     cout << "\n-----------------------------------\n";
 }
 
-// Finds a client by account number from the list
+// Find a client by account number from the list
 bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, sClient& Client)
 {
     for (sClient& C : vClients)
@@ -387,7 +436,7 @@ bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, 
     return false;
 }
 
-// Finds a user by username and password, and loads matching user into reference
+// Find a user by username and password, and loads matching user into reference
 bool FindUserByUsernameAndPassword(string Username, string Password, stUser& User)
 {
     
@@ -405,7 +454,7 @@ bool FindUserByUsernameAndPassword(string Username, string Password, stUser& Use
 
 }
 
-// Updates a client record by re-entering data
+// Update a client record by re-entering data
 sClient ChangeClientRecord(string AccountNumber)
 {
     sClient Client;
@@ -426,7 +475,7 @@ sClient ChangeClientRecord(string AccountNumber)
     return Client;
 }
 
-// Marks a client for deletion by account number
+// Mark a client for deletion by account number
 bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& vClients)
 {
     for (sClient& C : vClients)
@@ -440,7 +489,7 @@ bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& 
     return false;
 }
 
-// Saves all clients to file, skipping those marked for deletion
+// Save all clients to file, skipping those marked for deletion
 vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClients)
 {
     fstream  MyFile;
@@ -464,7 +513,7 @@ vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClien
     return vClients;
 }
 
-// Appends a new client record line to the file
+// Append a new client record line to the file
 void AddClientToFile(string FileName, string  stDataLine)
 {
     fstream MyFile;
@@ -477,7 +526,7 @@ void AddClientToFile(string FileName, string  stDataLine)
     }
 }
 
-// Reads and adds a new client to file
+// Read and add a new client to file
 void AddNewClient()
 {
     sClient Client;
@@ -485,7 +534,15 @@ void AddNewClient()
     AddClientToFile(ClientsFileName, ConvertRecordToLine(Client)); 
 }
 
-// Adds multiple clients by looping until user chooses to stop
+// Add a single new user to the users file
+void AddNewUser()
+{
+    stUser User;
+    //TODO 6
+    //User = ReadNewUser();
+
+}
+// Add multiple clients by looping until user chooses to stop
 void AddNewClients()
 {
     char AddMore = 'Y';
@@ -499,7 +556,26 @@ void AddNewClients()
     } while (toupper(AddMore) == 'Y');
 }
 
-// Deletes a client from file after confirmation
+// Add multiple users based on user input
+void AddNewUsers()
+{
+    char AddMore = 'Y';
+    do
+    {
+        //system("cls");
+        cout << "Adding New User:\n\n";
+
+        //TODO 5 
+        //AddNewUser();
+        cout << "\nUser Added Successfully, do you want to add more Users? Y/N? ";
+
+
+        cin >> AddMore;
+
+    } while (toupper(AddMore) == 'Y');
+
+}
+// Delete a client from file after confirmation
 bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClients)
 {
 
@@ -567,7 +643,7 @@ bool UpdateClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
 
 }
 
-// Deposits a specific amount to a client by account number
+// Deposit a specific amount to a client by account number
 bool DepositBalanceToClientByAccountNumber(string AccountNumber, double Amount, vector <sClient>& vClients)
 {
 
@@ -613,6 +689,19 @@ void ShowListUsersScreen()
 {
 
     ShowAllUsersScreen();
+
+}
+
+// Show the add new user screen and call AddNewUsers
+void ShowAddNewUserScreen()
+{
+
+    cout << "\n-----------------------------------\n";
+    cout << "\tAdd New User Screen";
+    cout << "\n-----------------------------------\n";
+
+    //TODO 4
+    //AddNewUsers();
 
 }
 
@@ -675,7 +764,7 @@ void ShowEndScreen()
     cout << "\n-----------------------------------\n";
 }
 
-// Displays the deposit screen and allows the user to deposit money into a client's account
+// Display the deposit screen and allow the user to deposit money into a client's account
 void ShowDepositScreen()
 {
     cout << "\n-----------------------------------\n";
@@ -706,7 +795,7 @@ void ShowDepositScreen()
 
 }
 
-// Displays the Withdraw screen and handles withdrawing money from a client's account
+// Display the Withdraw screen and handle withdrawing money from a client's account
 void ShowWithDrawScreen()
 {
     cout << "\n-----------------------------------\n";
@@ -744,7 +833,7 @@ void ShowWithDrawScreen()
 
 }
 
-// Shows a summary of all client balances including the total sum
+// Show a summary of all client balances including the total sum
 void ShowTotalBalancesScreen()
 {
     ShowTotalBalances();
@@ -777,7 +866,7 @@ void GoBackToManageUsersMenu()
 
 }
 
-// Reads the user input for transaction menu option
+// Read the user input for transaction menu option
 short ReadTransactionsMenuOption() //done
 {
     cout << "Choose what do you want to do? [1 to 4]? ";
@@ -787,7 +876,7 @@ short ReadTransactionsMenuOption() //done
     return Choice;
 }
 
-// Executes the selected transaction option
+// Execute the selected transaction option
 void PerfromTranactionsMenuOption(enTransactionsMenuOptions TransactionMenuOption)
 {
     switch (TransactionMenuOption)
@@ -867,8 +956,16 @@ void PerfromManageUsersMenuOption(enManageUsersMenuOptions ManageUsersMenuOption
     {
         system("cls");
         ShowListUsersScreen();
-        //TODO 3 
-        //GoBackToManageUsersMenu();
+        GoBackToManageUsersMenu();
+        break;
+    }
+
+    case enManageUsersMenuOptions::eAddNewUser:
+    {
+        system("cls");
+        //TODO 3
+        //ShowAddNewUserScreen();
+        GoBackToManageUsersMenu();
         break;
     }
 
@@ -952,7 +1049,8 @@ void PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
 
 // Show the main menu screen
 void ShowMainMenu()
-{
+{ 
+
     system("cls");
     cout << "===========================================\n";
     cout << "\t\tMain Menu Screen\n";
