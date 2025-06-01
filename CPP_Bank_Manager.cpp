@@ -36,6 +36,13 @@ enum enMainMenuOptions
     eManageUsers = 7, eExit = 8
 };
 
+// Define main menu permissions using bit flags for access control
+enum enMainMenuPermissions
+{
+    eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4,
+    pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64
+};
+
 // Define a user structure to store login credentials, permissions, and deletion flag
 struct stUser
 {
@@ -213,6 +220,27 @@ sClient ReadNewClient()
     return Client;
 }
 
+// Read and assign user permissions based on input
+int ReadPermissionsToSet()
+{
+    
+    int Permissions = 0;
+    char Answer = 'n';
+
+    cout << "\nDo you want to give full access? y/n? ";
+    cin >> Answer;
+    
+    if (Answer == toupper('y'))
+        return -1;
+
+    cout << "\nDo you want to give access to : \n ";
+
+    cout << "\nShow Client List? y/n? ";
+    cin >> Answer;
+   // if(Answer == toupper('y'))
+        //TODO 8 enMainMenuPermissions 
+}
+
 // Read new user data from input and ensure unique username
 stUser ReadNewUser()
 {
@@ -224,13 +252,17 @@ stUser ReadNewUser()
     getline(cin >> ws, User.UserName);
 
 
-    //TODO 7 : UserExistsByUsername
-    /*while (UserExistsByUsername(User.UserName, UsersFileName))
+    while (UserExistsByUsername(User.UserName, UsersFileName))
     {
         cout << "\nUser with [" << User.UserName << "] already exists, Enter another Username? ";
         getline(cin >> ws, User.UserName);
     }
-    */
+    
+    cout << "Enter Password? ";
+    getline(cin, User.Password);
+
+    //TODO 7:
+    //User.Permissions = ReadPermissionsToSet();
 
 }
 
