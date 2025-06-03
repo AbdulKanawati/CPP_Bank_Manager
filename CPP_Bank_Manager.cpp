@@ -515,6 +515,18 @@ void PrintClientCard(sClient Client)
     cout << "\n-----------------------------------\n";
 }
 
+// Print detailed user information in a card format
+void PrintUserCard(stUser User)
+{
+
+    cout << "\nThe following are the user details:\n";
+    cout << "-----------------------------------";
+    cout << "\nUsername    : " << User.UserName;
+    cout << "\nPassword    : " << User.Password;
+    cout << "\nPermissions : " << User.Permissions;
+    cout << "\n-----------------------------------\n";
+}
+
 // Find a client by account number from the list
 bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, sClient& Client)
 {
@@ -727,8 +739,12 @@ bool DeleteUserByUsername(string Username, vector<stUser>& vUsers)
     stUser User;
     char Answer = 'n';
 
-    //TODO 5: FindUserByUsername
-    //if(FindUserByUsername(Username, vUsers, User))
+    if (FindUserByUsername(Username, vUsers, User))
+    {
+        //TODO 5:
+        //PrintUserCard(User);
+
+    }
 }
 
 // Update client information by account number
