@@ -529,6 +529,22 @@ bool FindClientByAccountNumber(string AccountNumber, vector <sClient> vClients, 
     return false;
 }
 
+// Find a user by username and return true if found, passing user data by reference
+bool FindUserByUsername(string Username, vector<stUser> vUsers, stUser& User)
+{
+
+    for (stUser U : vUsers)
+    {
+        if (U.UserName == Username)
+        {
+            User = U;
+            return true;
+        }
+    }
+    return false;
+
+}
+
 // Find a user by username and password, and loads matching user into reference
 bool FindUserByUsernameAndPassword(string Username, string Password, stUser& User)
 {
@@ -699,6 +715,22 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
     }
 }
 
+// Delete a user by username after confirmation and update the file
+bool DeleteUserByUsername(string Username, vector<stUser>& vUsers) 
+{
+    if (Username == "Admin")
+    {
+        cout << "\n\nYou cannot Delete This User.";
+        return false;
+    }
+
+    stUser User;
+    char Answer = 'n';
+
+    //TODO 5: FindUserByUsername
+    //if(FindUserByUsername(Username, vUsers, User))
+}
+
 // Update client information by account number
 bool UpdateClientByAccountNumber(string AccountNumber, vector <sClient>& vClients)
 {
@@ -817,8 +849,10 @@ void ShowDeleteUserScreen()
 
     vector<stUser> vUsers = LoadUsersDataFromFile(UsersFileName);
 
-    //TODO 4: ReadUserName
-    //string Username = ReadUserName();
+    string Username = ReadUserName();
+    
+    //TODO 4: DeleteUserByUsername
+    //DeleteUserByUsername(Username, vUsers);
 }
 
 // Show the delete client screen
