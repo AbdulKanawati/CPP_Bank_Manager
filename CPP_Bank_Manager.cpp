@@ -655,11 +655,9 @@ void AddNewUsers()
     char AddMore = 'Y';
     do
     {
-        //system("cls");
         cout << "Adding New User:\n\n";
 
-        //TODO 5 
-        //AddNewUser();
+        AddNewUser();
         cout << "\nUser Added Successfully, do you want to add more Users? Y/N? ";
 
 
@@ -668,6 +666,7 @@ void AddNewUsers()
     } while (toupper(AddMore) == 'Y');
 
 }
+
 // Delete a client from file after confirmation
 bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClients)
 {
