@@ -139,6 +139,18 @@ string ConvertClientRecordToLine(sClient Client, string Seperator = "#//#")
     return stClientRecord;
 }
 
+// Convert a user record into a line to be stored in the file
+string ConvertUserRecordToLine(stUser User, string Seperator = "#//#")
+{
+    string stUserRecord = "";
+
+    stUserRecord += User.UserName + Seperator;
+    stUserRecord += User.Password + Seperator;
+    stUserRecord += to_string(User.Permissions);
+
+    return stUserRecord;
+}
+
 // Check if a client exists by account number
 bool ClientExistsByAccountNumber(string AccountNumber, string FileName)
 {
@@ -620,6 +632,7 @@ void AddNewUser()
 {
     stUser User;
     User = ReadNewUser();
+    //TODO 6: ConvertUserRecordToLine
     //AddDataLineToFile(UsersFileName, ConvertUserRecordToLine(User));
 }
 
