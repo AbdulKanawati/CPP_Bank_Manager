@@ -776,6 +776,18 @@ string ReadClientAccountNumber()
     return AccountNumber;
 }
 
+// Read a username from user input
+string ReadUserName()
+{
+    string Username = "";
+
+    cout << "\nPlease enter Username? ";
+    cin >> Username;
+    
+    return Username;
+
+}
+
 // Show the list users screen
 void ShowListUsersScreen()
 {
@@ -794,6 +806,19 @@ void ShowAddNewUserScreen()
 
     AddNewUsers();
 
+}
+
+// Show the delete user screen and delete user by username
+void ShowDeleteUserScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tDelete Users Screen";
+    cout << "\n-----------------------------------\n";
+
+    vector<stUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+
+    //TODO 4: ReadUserName
+    //string Username = ReadUserName();
 }
 
 // Show the delete client screen
@@ -1054,10 +1079,17 @@ void PerfromManageUsersMenuOption(enManageUsersMenuOptions ManageUsersMenuOption
     case enManageUsersMenuOptions::eAddNewUser:
     {
         system("cls");
-        //TODO 3
-        //ShowAddNewUserScreen();
+        ShowAddNewUserScreen();
         GoBackToManageUsersMenu();
         break;
+    }
+
+    case enManageUsersMenuOptions::eDeleteUser:
+    {
+        system("cls");
+        //TODO 3: ShowDeleteUserScreen
+        //ShowDeleteUserScreen();
+        GoBackToManageUsersMenu();
     }
 
     }
