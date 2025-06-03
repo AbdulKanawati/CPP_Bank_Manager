@@ -610,6 +610,22 @@ bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& 
     return false;
 }
 
+// Mark a user for deletion by setting the deletion flag if username matches
+bool MarkUserForDeleteByUsername(string Username, vector<stUser>& vUsers)
+{
+
+    for (stUser& U : vUsers)
+    {
+        if (U.UserName == Username)
+        {
+            U.MarkForDelete = true;
+            return true;
+        }
+    }
+    return false;
+
+}
+
 // Save all clients to file, skipping those marked for deletion
 vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClients)
 {
@@ -741,8 +757,16 @@ bool DeleteUserByUsername(string Username, vector<stUser>& vUsers)
 
     if (FindUserByUsername(Username, vUsers, User))
     {
-        //TODO 5:
-        //PrintUserCard(User);
+        PrintUserCard(User);
+
+        cout << "\n\nAre you sure you want delete this User? y/n ? ";
+        cin >> Answer;
+
+        if (toupper(Answer) == 'Y')
+        {
+            //TODO 5: MarkUserForDeleteByUsername
+            //MarkUserForDeleteByUsername(Username, vUsers);
+        }
 
     }
 }
