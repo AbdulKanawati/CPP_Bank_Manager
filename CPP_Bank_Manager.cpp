@@ -792,8 +792,7 @@ void ShowAddNewUserScreen()
     cout << "\tAdd New User Screen";
     cout << "\n-----------------------------------\n";
 
-    //TODO 4
-    //AddNewUsers();
+    AddNewUsers();
 
 }
 
