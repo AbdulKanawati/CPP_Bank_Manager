@@ -632,8 +632,7 @@ void AddNewUser()
 {
     stUser User;
     User = ReadNewUser();
-    //TODO 6: ConvertUserRecordToLine
-    //AddDataLineToFile(UsersFileName, ConvertUserRecordToLine(User));
+    AddDataLineToFile(UsersFileName, ConvertUserRecordToLine(User));
 }
 
 // Add multiple clients by looping until user chooses to stop
