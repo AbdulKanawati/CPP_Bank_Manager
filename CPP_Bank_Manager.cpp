@@ -770,7 +770,7 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector <sClient>& vClient
     }
     else
     {
-        cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+        cerr << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
         return false;
     }
 }
@@ -797,12 +797,18 @@ bool DeleteUserByUsername(string Username, vector<stUser>& vUsers)
         if (toupper(Answer) == 'Y')
         {
             MarkUserForDeleteByUsername(Username, vUsers);
+            SaveUsersDataToFile(UsersFileName, vUsers);
 
-            //TODO 5: SaveUsersDataToFile
-            //SaveUsersDataToFile(UsersFileName, vUsers);
+            cout << "\n\nUser deleted successfully.\n";
+            return true;
         }
-
     }
+    else
+    {
+        cerr << "\nUser with username (" << Username << ") not found!\n";
+    }
+
+    return false;
 }
 
 // Update client information by account number
