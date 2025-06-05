@@ -931,8 +931,8 @@ void ShowDeleteUserScreen()
 
     string Username = ReadUserName();
     
-    //TODO 4: DeleteUserByUsername
-    //DeleteUserByUsername(Username, vUsers);
+    DeleteUserByUsername(Username, vUsers);
+
 }
 
 // Show the delete client screen
