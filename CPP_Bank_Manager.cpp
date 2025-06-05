@@ -650,6 +650,34 @@ vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClien
     return vClients;
 }
 
+// Save all users to file, excluding those marked for deletion
+void SaveUsersDataToFile(string FileName, const vector<stUser>& vUsers) 
+{
+
+    fstream MyFile;
+    MyFile.open(FileName, ios::out | ios::trunc);
+
+    string DataLine;
+
+    if (MyFile.is_open())
+    {
+        for (const stUser& U : vUsers)
+        {
+            if (!U.MarkForDelete)
+            {
+                //we only write records that are not marked for delete.  
+                DataLine = ConvertUserRecordToLine(U);
+                MyFile << DataLine << endl;
+            }
+        }
+        MyFile.close();
+    }
+    else
+    {
+        cerr << "Error: Couldn't open file for writing.\n";
+    }
+}
+
 // Append a single line of text data to the specified file
 void AddDataLineToFile(string FileName, string  stDataLine)
 {
@@ -764,8 +792,10 @@ bool DeleteUserByUsername(string Username, vector<stUser>& vUsers)
 
         if (toupper(Answer) == 'Y')
         {
-            //TODO 5: MarkUserForDeleteByUsername
-            //MarkUserForDeleteByUsername(Username, vUsers);
+            MarkUserForDeleteByUsername(Username, vUsers);
+
+            //TODO 5: SaveUsersDataToFile
+            //SaveUsersDataToFile(UsersFileName, vUsers);
         }
 
     }
