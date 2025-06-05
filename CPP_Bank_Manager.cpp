@@ -627,16 +627,17 @@ bool MarkUserForDeleteByUsername(string Username, vector<stUser>& vUsers)
 }
 
 // Save all clients to file, skipping those marked for deletion
-vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClients)
+void SaveClientsDataToFile(string FileName, const vector<sClient>& vClients)
 {
-    fstream  MyFile;
-    MyFile.open(FileName, ios::out); // overwrite
+    
+    fstream MyFile;
+    MyFile.open(FileName, ios::out | ios::trunc); // overwrite
 
     string DataLine;
 
     if (MyFile.is_open())
     {
-        for (sClient& C : vClients)
+        for (const sClient& C : vClients)
         {
             if (!C.MarkForDelete)
             {
@@ -647,7 +648,10 @@ vector <sClient> SaveClientsDataToFile(string FileName, vector <sClient>& vClien
         }
         MyFile.close();
     }
-    return vClients;
+    else
+    {
+        cerr << "Error: Couldn't open file for writing: " << FileName << endl;
+    }
 }
 
 // Save all users to file, excluding those marked for deletion
@@ -674,7 +678,7 @@ void SaveUsersDataToFile(string FileName, const vector<stUser>& vUsers)
     }
     else
     {
-        cerr << "Error: Couldn't open file for writing.\n";
+        cerr << "Error: Couldn't open file for writing: " << FileName << endl;
     }
 }
 
